@@ -30,6 +30,7 @@ class ResponseData:
     class ResponseCode(Enum):
         OK = "200 OK"
         NOT_FOUND = "404 Not Found"
+        UNAUTHORIZED = "401 Unauthorized"
     class Header:
         def __init__(self, type: Literal["Content-Length", "Refresh"], data: int):
             self.output = type + ": " + data + "\r\n"
@@ -46,7 +47,7 @@ class ResponseData:
     def __init__(self, code: ResponseCode):
         self._code = code
         self.headers: list[ResponseData.Header] = []
-        self.data = "".encode()
+        self.data = "".encode(encoding="utf-8")
     def appendHeader(self, header: Header):
         self.headers.append(header)
         return self
@@ -54,13 +55,13 @@ class ResponseData:
         self.data += data
         return self
     def appendData(self, data: str):
-        self.data += data.encode()
+        self.data += data.encode(encoding="utf-8")
         return self
     def build(self) -> bytes:
-        returnData: bytes = ("HTTP/1.1" + self._code.value + "\r\n").encode()
+        returnData: bytes = ("HTTP/1.1 " + self._code.value + "\r\n").encode()
         for header in self.headers:
-            returnData += header.output.encode()
-        returnData += "\r\n".encode()
+            returnData += header.output.encode(encoding="utf-8")
+        returnData += "\r\n".encode(encoding="utf-8")
         return returnData + self.data
 
 class Server:
@@ -116,36 +117,24 @@ class Server:
         print(f"Server listening")
 
         while self.running:
-            try:
-                # Accept a connection from a client
-                client_socket, client_addr = self.server_socket.accept()
+            # Accept a connection from a client
+            client_socket, client_addr = self.server_socket.accept()
 
-                # Receive the request data
-                client_request, data, cookies, get = self.recieve_data(client_socket)
+            # Receive the request data
+            client_request, data, cookies, get = self.recieve_data(client_socket)
 
-                request = client_request.split("\r\n")[0].split(" ")[1].split("?")
+            request = client_request.split("\r\n")[0].split(" ")[1].split("?")
 
-                print(f"Request for {request[0]} from {client_addr} with cookies {cookies} and data {data}\n")
+            if len(request) == 2: data = self.parseData(request[1])
 
-                if get and request[0] in self.gets:
-                    if len(request) == 2: data = self.parseData(request[1])
-                    client_socket.sendall(self.gets[request[0]](cookies, data).build())
-                elif not get and request[0] in self.posts:
-                    client_socket.sendall(self.posts[request[0]](cookies, data).build())
-                else:
-                    html_data = open("./404.html", "r").read()
-                    client_socket.sendall(f"HTTP/1.1 200 OK\nContent-type: text/html\n\n{html_data}".encode('utf-8'))
-            
-                client_socket.close()
-            except Exception as e:
-                try:
-                    message = "{\r\n\t\"error\": \"" + str(e) + "\"\r\n\t\"recieved_data\": \"" + client_request + "\"\r\n}"
-                    client_socket.sendall(("HTTP/1.1 400 Bad Request\r\n" +
-                                          "Content-Type: application/json\r\n" +
-                                         f"Content-Length: {len(message.encode('utf-8'))}\r\n" +
-                                          "\r\n" +
-                                          message).encode('utf-8'))
-                    print("Errored reply sent!")
-                except Exception as e2:
-                    print(f"I have no idea what happened T-T\r\n{repr(e)}\r\n{repr(e2)}")
-                    pass
+            print(f"Request for {request[0]} from {client_addr} with cookies {cookies} and data {data}\n")
+
+            if get and request[0] in self.gets:
+                client_socket.sendall(self.gets[request[0]](cookies, data).build())
+            elif not get and request[0] in self.posts:
+                client_socket.sendall(self.posts[request[0]](cookies, data).build())
+            else:
+                html_data = open("./site_data/404.html", "r").read()
+                client_socket.sendall(f"HTTP/1.1 404 Not Found\nContent-type: text/html\n\n{html_data}".encode('utf-8'))
+                
+            client_socket.close()

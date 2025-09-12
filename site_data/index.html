@@ -1,37 +1,103 @@
+<!--I gotta get paid or somethin because streamlit -> vanilla HTML is hard brooo-->
 <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VEX Robotics Club</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2284%22>🤖</text></svg>">
+        <link href='https://fonts.googleapis.com/css?family=Material Symbols Rounded' rel='stylesheet'>
         <style>
             body {
-                background: linear-gradient(135deg, #ff9800 0%, #4caf50 100%);
+                color: #fff;
+                font-family: "Source Sans", sans-serif;
+                background-color: rgb(14, 17, 23);
             }
-            .main {
-                background-color: #fff;
-                border-radius: 10px;
-                padding: 2rem;
-                box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            .sidebar {
+                height: 100%;
+                width: 256px; /* Set the width of the sidebar */
+                position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+                z-index: 1; /* Stay on top */
+                top: 0; /* Stay at the top */
+                left: 0;
+                background-color: rgb(38, 39, 48);
+                overflow-x: hidden; /* Disable horizontal scroll */
+                padding-top: 20px;
             }
-            h1, h2, h3 {
-                color: #ff9800;
-                font-family: 'Roboto', sans-serif;
-            }
-            .stButton>button {
-                background-color: #4caf50;
-                color: white;
-                border-radius: 8px;
-                border: none;
-                font-weight: bold;
-            }
-            .stButton>button:hover {
-                background-color: #388e3c;
+            .page_container {
+                height: 100%;
+                width: 2262px;
+                position: fixed;
+                top: 0;
+                right: 0;
+                text-align: center;
             }
         </style>
     </head>
     <body>
-    
+        <noscript>This website requires the use of JavaScript code. Please enable it and refresh</noscript>
+        <section class="sidebar">
+            <div class="sidebar_header">
+                <button class="material_icon_button_container" aria-label="">
+                    <span class="material_icon_container">
+                        <span translate="no" class="material_icon">
+                            keyboard_double_arrow_left
+                        </span>
+                    </span>
+                </button>
+            </div>
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
+                </g>
+            </svg>
+            <h2>Navigate</h2>
+            <div id="sidebar_buttons_container">
+                <div>
+                    <input name="sidebar_option" id="about" type="radio" value="0">
+                    <label for="about">About</label>
+                </div>
+                <div>
+                    <input name="sidebar_option" id="teams" type="radio" value="1">
+                    <label for="teams">Teams</label>
+                </div>
+                <div>
+                    <input name="sidebar_option" id="schedule" type="radio" value="2">
+                    <label for="schedule">Schedule</label>
+                </div>
+            </div>
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                </g>
+            </svg>
+        </section>
+        <section class="page_container">
+            <div class="title_container">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                    </g>
+                </svg>
+                <h1>VEX Robotics Club</h1>
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
+                    </g>
+                </svg>
+            </div>
+        </section>
+        <script type="text/javascript">
+            const buttons = document.querySelectorAll('input[name="sidebar_option"]');
+            buttons.forEach(button => {
+                button.addEventListener('change', () => {
+                    const value = document.getElementById("sidebar_buttons_container").querySelector('input[name="sidebar_option"]:checked').value;
+                });
+            });
+        </script>
     </body>
 </html>
