@@ -1,7 +1,7 @@
 import os
 from framework import Server, ResponseData
 
-server = Server()
+server = Server(port=8080)
 
 @server.get("/")
 def main(_, __):

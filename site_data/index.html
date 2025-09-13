@@ -26,11 +26,20 @@
             }
             .page_container {
                 height: 100%;
-                width: 2262px;
+                width: calc(100vw-256px);
                 position: fixed;
                 top: 0;
                 right: 0;
                 text-align: center;
+            }
+            .page_container > * {
+                position: static;
+            }
+            div.page_radio_container.hidden {
+                display: none;
+            }
+            div.page_radio_container.visible {
+                display: block;
             }
         </style>
     </head>
@@ -55,7 +64,7 @@
             <h2>Navigate</h2>
             <div id="sidebar_buttons_container">
                 <div>
-                    <input name="sidebar_option" id="about" type="radio" value="0">
+                    <input name="sidebar_option" id="about" type="radio" value="0" checked>
                     <label for="about">About</label>
                 </div>
                 <div>
@@ -90,12 +99,91 @@
                     </g>
                 </svg>
             </div>
+            <div class="page_radio_container visible page_radio_0">
+                <h2>About Us</h2>
+                <p>Welcome to the VEX Robotics Club! Our club is dedicated to fostering a love for robotics and technology among students.<br>
+                We provide hands-on learning where members build, program, and compete with robots.<br><br>
+                <span style="font-weight: bold;">How it works:</span><br>
+                - Regular meetings and workshops<br>
+                - Team collaboration on projects<br>
+                - Preparation for competitions<br>
+                - Emphasis on teamwork, creativity, and innovation</p>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="page_radio_container hidden page_radio_1">
+                <h2>Our Teams</h2>
+                <h3>Design Team</h3>
+                <p>Creates robot design and aesthetics.</p>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                    </g>
+                </svg>
+                <h3>Programming Team</h3>
+                <p>Codes and develops software for the robot.</p>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                    </g>
+                </svg>
+                <h3>Build Team</h3>
+                <p>Assembles and constructs the robot.</p>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                    </g>
+                </svg>
+                <h3>Marketing Team</h3>
+                <p>Promotes the club and manages outreach.</p>
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="page_radio_container hidden page_radio_2">
+                <h2>Competition Schedule</h2>
+                <table id="competition_table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                    </tr>
+                </table>
+                <script type="text/javascript">
+                    async function getData() {
+                        const table = document.querySelector('table[id="competition_table"]');
+                        try {
+                            const response = await fetch("/file?file=events.json");
+                            const jsonData = await response.json();
+                            for (var i = 0; i < jsonData.length; i++) {
+                                const row = table.appendChild(document.createElement("tr"));
+                                row.appendChild(document.createElement("td")).textContent = jsonData[i].date;
+                                row.appendChild(document.createElement("td")).textContent = jsonData[i].time;
+                                row.appendChild(document.createElement("td")).textContent = jsonData[i].location;
+                            }
+                        } catch (e) {}
+                    }
+                    getData();
+                </script>
+            </div>
         </section>
         <script type="text/javascript">
             const buttons = document.querySelectorAll('input[name="sidebar_option"]');
             buttons.forEach(button => {
                 button.addEventListener('change', () => {
                     const value = document.getElementById("sidebar_buttons_container").querySelector('input[name="sidebar_option"]:checked').value;
+                    document.querySelector("div.page_radio_container.visible").classList.replace("visible", "hidden");
+                    document.querySelector("div.page_radio_container.hidden.page_radio_" + value).classList.replace("hidden", "visible");
                 });
             });
         </script>
