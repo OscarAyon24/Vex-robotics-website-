@@ -1,17 +1,1 @@
-[
-    {
-        "date": "2023-10-15",
-        "time": "10:00 AM",
-        "location": "School Gymnasium"
-    },
-    {
-        "date": "2023-11-05",
-        "time": "1:00 PM",
-        "location": "Community Center"
-    },
-    {
-        "date": "2023-12-01",
-        "time": "9:00 AM",
-        "location": "City Stadium"
-    }
-]
+[{"date": "2023-10-15","time": "10:00 AM","location": "School Gymnasium"},{"date": "2023-11-05","time": "1:00 PM","location": "Community Center"},{"date": "2023-12-01","time": "9:00 AM","location": "City Stadium"}]

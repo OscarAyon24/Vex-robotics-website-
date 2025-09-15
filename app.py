@@ -1,7 +1,7 @@
 import os
 from framework import Server, ResponseData
 
-server = Server(port=8080)
+server = Server(port=8081)
 
 @server.get("/")
 def main(_, __):
@@ -9,7 +9,8 @@ def main(_, __):
 
 @server.get("/file")
 def fileEndpoint(_, data: dict[str, str]):
-    if not data['file'].endswith(".json"): return ResponseData(ResponseData.ResponseCode.UNAUTHORIZED)
+    if not data.__contains__('file'): return ResponseData(ResponseData.ResponseCode.BAD_REQUEST)
+    elif not data['file'].endswith(".json"): return ResponseData(ResponseData.ResponseCode.UNAUTHORIZED)
     elif not os.path.exists("./site_data/" + data["file"]): return ResponseData(ResponseData.ResponseCode.NOT_FOUND)
     else: return ResponseData(ResponseData.ResponseCode.OK).appendHeader(ResponseData.Header("Content-Type", {"json": "application/json"}[data["file"].split(".")[-1]])).appendData(open("./site_data/" + data["file"], "r", encoding="utf-8").read())
 

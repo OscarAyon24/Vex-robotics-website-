@@ -32,6 +32,7 @@ class ResponseData:
         OK = "200 OK"
         NOT_FOUND = "404 Not Found"
         UNAUTHORIZED = "401 Unauthorized"
+        BAD_REQUEST = "400 Bad Request"
     class Header:
         def __init__(self, type: Literal["Content-Length", "Refresh"], data: int):
             self.output = type + ": " + data + "\r\n"

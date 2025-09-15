@@ -1,6 +1,6 @@
 <!--I gotta get paid or somethin because streamlit -> vanilla HTML is hard brooo-->
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,10 +74,7 @@
                 max-width: 100%;
                 min-width: 1rem;
             }
-            /*div.page_radio_container.visible {
-                display: block;
-            }*/
-            span.material_icon_container {
+            span.material_icon {
                 font-family: 'Material Symbols Rounded', sans-serif;
             }
             table {
@@ -103,18 +100,16 @@
         <noscript>This website requires the use of JavaScript code. Please enable it and refresh</noscript>
         <section class="sidebar">
             <div class="sidebar_header">
-                <button class="material_icon_button_container" aria-label="">
-                    <span class="material_icon_container">
-                        <span translate="no" class="material_icon">
-                            keyboard_double_arrow_left
-                        </span>
+                <button class="material_icon_button" aria-label="">
+                    <span translate="no" class="material_icon">
+                        keyboard_double_arrow_left
                     </span>
                 </button>
             </div>
-            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g>
                     <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
-                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
+                    <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#4caf50" stroke-width="2"/>
                 </g>
             </svg>
             <h2>Navigate</h2>
@@ -132,27 +127,33 @@
                     <label for="schedule">Schedule</label>
                 </div>
             </div>
-            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g>
                     <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                    <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                 </g>
             </svg>
         </section>
         <section class="page_container">
             <div class="content">
                 <div class="title_container" style="text-align: center;">
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                            <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                         </g>
                     </svg>
-                    <h1 class="title">VEX Robotics Club</h1>
-                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <h1 class="title">
+                        <svg style="position: relative; top: 7px;" role="img" width="180" height="72" viewBox="-.5 -1 11.5 5" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.828 1.526c-.051.006-.032.068-.015.07l1.3.881-1.405.945c-.037.022-.026.071.009.074h.826c.009-.001.022-.009.03-.016l.999-.689.987.689c.013.01.024.016.039.016h.805c.026-.002.056-.047.013-.071L9.014 2.478l1.305-.882c.027-.021.027-.069-.02-.071H9.502c-.011 0-.02.001-.026.005l-.908.635-.913-.631c-.006-.004-.016-.01-.025-.009ZM2.305 3.474c-.005.006-.016.013-.029.013H1.613c-.011-.001-.02-.006-.028-.015L.03 1.583C.01 1.56.026 1.524.058 1.521H.739c.012.001.02.006.027.013L1.9481 3.0065 3.151 1.536c.007-.009.021-.016.032-.015h.67c.033.004.052.027.032.06Z" fill="#a3a3a3" />
+                            <path d="M4.226 1.482c-.185-.366-.119-1.25.359-1.289H6.264c.239.04.193.525.004.532H4.61c-.223.009-.217.506-.011.532H6.272c.2.047.213.476 0 .533H4.601c-.103.005-.15.148-.156.244-.007.091.026.277.156.285H6.267c.229.039.196.526.003.537H4.582c-.428-.047-.593-.866-.332-1.326Z" fill="#e01414" />
+                        </svg>
+                        Robotics Club
+                    </h1>
+                    <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
+                            <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#4caf50" stroke-width="2"/>
                         </g>
                     </svg>
                 </div>
@@ -166,10 +167,10 @@
                         <li>Preparation for competitions</li>
                         <li>Emphasis on teamwork, creativity, and innovation</li>
                     </ul>
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg role="img" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
+                            <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#4caf50" stroke-width="2"/>
                         </g>
                     </svg>
                 </div>
@@ -177,34 +178,34 @@
                     <h2 class="subtitle">Our Teams</h2>
                     <h3>Design Team</h3>
                     <p>Creates robot design and aesthetics.</p>
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                            <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                         </g>
                     </svg>
                     <h3>Programming Team</h3>
                     <p>Codes and develops software for the robot.</p>
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                            <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                         </g>
                     </svg>
                     <h3>Build Team</h3>
                     <p>Assembles and constructs the robot.</p>
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                            <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                         </g>
                     </svg>
                     <h3>Marketing Team</h3>
                     <p>Promotes the club and manages outreach.</p>
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                            <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                         </g>
                     </svg>
                 </div>
@@ -232,7 +233,10 @@
                                     row.appendChild(document.createElement("td")).textContent = jsonData[i].time;
                                     row.appendChild(document.createElement("td")).textContent = jsonData[i].location;
                                 }
-                            } catch (e) {}
+                            } catch (e) {
+                                table.remove();
+                                //Error message here
+                            }
                         }
                         getData();
                     </script>
