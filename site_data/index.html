@@ -8,6 +8,26 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2284%22>🤖</text></svg>">
         <link href='https://fonts.googleapis.com/css?family=Material Symbols Rounded' rel='stylesheet'>
         <style>
+            @keyframes collapse {
+                from
+                {
+                    left: 0px;
+                }
+                to
+                {
+                    left: -256px;
+                }
+            }
+            @keyframes rotate {
+                from
+                {
+                    transform: rotateZ(0deg);
+                }
+                to
+                {
+                    transform: rotateZ(180deg);
+                }
+            }
             body {
                 color: #fff;
                 font-family: "Source Sans", sans-serif;
@@ -99,40 +119,42 @@
     <body>
         <noscript>This website requires the use of JavaScript code. Please enable it and refresh</noscript>
         <section class="sidebar">
-            <div class="sidebar_header">
+            <div class="sidebar">
+                <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
+                        <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#4caf50" stroke-width="2"/>
+                    </g>
+                </svg>
+                <h2>Navigate</h2>
+                <div id="sidebar_buttons_container">
+                    <div>
+                        <input name="sidebar_option" id="about" type="radio" value="0" checked>
+                        <label for="about">About</label>
+                    </div>
+                    <div>
+                        <input name="sidebar_option" id="teams" type="radio" value="1">
+                        <label for="teams">Teams</label>
+                    </div>
+                    <div>
+                        <input name="sidebar_option" id="schedule" type="radio" value="2">
+                        <label for="schedule">Schedule</label>
+                    </div>
+                </div>
+                <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                        <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="collapse_button">
                 <button class="material_icon_button" aria-label="">
                     <span translate="no" class="material_icon">
                         keyboard_double_arrow_left
                     </span>
                 </button>
             </div>
-            <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g>
-                    <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
-                    <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#4caf50" stroke-width="2"/>
-                </g>
-            </svg>
-            <h2>Navigate</h2>
-            <div id="sidebar_buttons_container">
-                <div>
-                    <input name="sidebar_option" id="about" type="radio" value="0" checked>
-                    <label for="about">About</label>
-                </div>
-                <div>
-                    <input name="sidebar_option" id="teams" type="radio" value="1">
-                    <label for="teams">Teams</label>
-                </div>
-                <div>
-                    <input name="sidebar_option" id="schedule" type="radio" value="2">
-                    <label for="schedule">Schedule</label>
-                </div>
-            </div>
-            <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g>
-                    <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                    <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
-                </g>
-            </svg>
         </section>
         <section class="page_container">
             <div class="content">
@@ -251,6 +273,13 @@
                     document.querySelector("div.page_radio_container.visible").classList.replace("visible", "hidden");
                     document.querySelector("div.page_radio_container.hidden.page_radio_" + value).classList.replace("hidden", "visible");
                 });
+            });
+
+            const collaps = document.querySelector("button.material_icon_button"), sidebar = document.querySelector("section.sidebar");
+            collaps.addEventListener('click', () => {
+                sidebar.style = "animation: collapse 0.5s; left: -256px;";
+                collaps.style = "animation: rotate 0.5s; transform: rotateZ(180deg);";
+                //collaps.style = "right: 0px;";
             });
         </script>
     </body>

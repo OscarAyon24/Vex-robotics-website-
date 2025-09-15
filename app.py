@@ -14,4 +14,20 @@ def fileEndpoint(_, data: dict[str, str]):
     elif not os.path.exists("./site_data/" + data["file"]): return ResponseData(ResponseData.ResponseCode.NOT_FOUND)
     else: return ResponseData(ResponseData.ResponseCode.OK).appendHeader(ResponseData.Header("Content-Type", {"json": "application/json"}[data["file"].split(".")[-1]])).appendData(open("./site_data/" + data["file"], "r", encoding="utf-8").read())
 
+@server.get("/girls")
+def teamG(_, __):
+    pass
+
+@server.get("/unity")
+def teamU(_, __):
+    pass
+
+@server.get("/nexus")
+def teamN(_, __):
+    pass
+
+@server.get("/recon")
+def teamR(_, __):
+    pass
+
 server.listen()
