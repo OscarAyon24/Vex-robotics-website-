@@ -12,34 +12,90 @@
                 color: #fff;
                 font-family: "Source Sans", sans-serif;
                 background-color: rgb(14, 17, 23);
+                text-size-adjust: 100%;
+                display: flex;
+                flex-direction: row;
+                -webkit-box-pack: start;
+                place-content: flex-start;
+                -webkit-box-align: stretch;
+                align-items: stretch;
+                position: absolute;
+                inset: 0px;
+                overflow: hidden;
+                line-height: 1.6;
+            }
+            h1.title {
+                font-size: 2.75rem;
+                font-weight: 700;
+                margin: 0px;
+                padding: 1.25rem 0px 1rem;
+                line-height: 1.2;
+            }
+            h2.subtitle {
+                font-size: 2.25rem;
+                font-weight: 600;
+                padding: 1rem 0px;
+                margin: 0px;
+            }
+            p {
+                font-weight: 400;
             }
             .sidebar {
-                height: 100%;
-                width: 256px; /* Set the width of the sidebar */
-                position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-                z-index: 1; /* Stay on top */
-                top: 0; /* Stay at the top */
-                left: 0;
+                position: relative;
+                user-select: auto;
+                width: 256px;
+                height: auto;
+                box-sizing: border-box;
+                flex-shrink: 0;
                 background-color: rgb(38, 39, 48);
-                overflow-x: hidden; /* Disable horizontal scroll */
-                padding-top: 20px;
             }
             .page_container {
-                height: 100%;
-                width: calc(100vw-256px);
-                position: fixed;
-                top: 0;
-                right: 0;
-                text-align: center;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                overflow: auto;
+                -webkit-box-align: center;
+                align-items: center;
+                height: 100dvh;
             }
-            .page_container > * {
-                position: static;
+            .content {
+                padding: 6rem 1rem 10rem;
+                width: 100%;
+                max-width: 736px;
             }
             div.page_radio_container.hidden {
                 display: none;
             }
-            div.page_radio_container.visible {
+            div.page_radio_container.page_radio_0 p {
+                margin-bottom: 16px;
+            }
+            div.page_radio_container div {
+                width: 100%;
+                max-width: 100%;
+                min-width: 1rem;
+            }
+            /*div.page_radio_container.visible {
                 display: block;
+            }*/
+            span.material_icon_container {
+                font-family: 'Material Symbols Rounded', sans-serif;
+            }
+            table {
+                border: 1px solid rgba(250, 250, 250, 0.1);
+                border-radius: 0.5rem;
+                border-spacing: 0px;
+                display: table;
+                border-collapse: separate;
+            }
+            td, th {
+                border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+                border-right: 1px solid rgba(250, 250, 250, 0.1); 
+            }
+            td:last-child, th:last-child {
+                border-right: none;
+            }
+            tbody tr:last-child * {
+                border-bottom: none;
             }
         </style>
     </head>
@@ -84,97 +140,103 @@
             </svg>
         </section>
         <section class="page_container">
-            <div class="title_container">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
-                    </g>
-                </svg>
-                <h1>VEX Robotics Club</h1>
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="page_radio_container visible page_radio_0">
-                <h2>About Us</h2>
-                <p>Welcome to the VEX Robotics Club! Our club is dedicated to fostering a love for robotics and technology among students.<br>
-                We provide hands-on learning where members build, program, and compete with robots.<br><br>
-                <span style="font-weight: bold;">How it works:</span><br>
-                - Regular meetings and workshops<br>
-                - Team collaboration on projects<br>
-                - Preparation for competitions<br>
-                - Emphasis on teamwork, creativity, and innovation</p>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="page_radio_container hidden page_radio_1">
-                <h2>Our Teams</h2>
-                <h3>Design Team</h3>
-                <p>Creates robot design and aesthetics.</p>
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
-                    </g>
-                </svg>
-                <h3>Programming Team</h3>
-                <p>Codes and develops software for the robot.</p>
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
-                    </g>
-                </svg>
-                <h3>Build Team</h3>
-                <p>Assembles and constructs the robot.</p>
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
-                    </g>
-                </svg>
-                <h3>Marketing Team</h3>
-                <p>Promotes the club and manages outreach.</p>
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                        <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="page_radio_container hidden page_radio_2">
-                <h2>Competition Schedule</h2>
-                <table id="competition_table">
-                    <tr>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Location</th>
-                    </tr>
-                </table>
-                <script type="text/javascript">
-                    async function getData() {
-                        const table = document.querySelector('table[id="competition_table"]');
-                        try {
-                            const response = await fetch("/file?file=events.json");
-                            const jsonData = await response.json();
-                            for (var i = 0; i < jsonData.length; i++) {
-                                const row = table.appendChild(document.createElement("tr"));
-                                row.appendChild(document.createElement("td")).textContent = jsonData[i].date;
-                                row.appendChild(document.createElement("td")).textContent = jsonData[i].time;
-                                row.appendChild(document.createElement("td")).textContent = jsonData[i].location;
-                            }
-                        } catch (e) {}
-                    }
-                    getData();
-                </script>
+            <div class="content">
+                <div class="title_container" style="text-align: center;">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                        </g>
+                    </svg>
+                    <h1 class="title">VEX Robotics Club</h1>
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="page_radio_container visible page_radio_0">
+                    <h2 class="subtitle">About Us</h2>
+                    <p>Welcome to the VEX Robotics Club! Our club is dedicated to fostering a love for robotics and technology among students. We provide hands-on learning where members build, program, and compete with robots.</p>
+                    <p><strong>How it works:</strong></p>
+                    <ul>
+                        <li>Regular meetings and workshops</li>
+                        <li>Team collaboration on projects</li>
+                        <li>Preparation for competitions</li>
+                        <li>Emphasis on teamwork, creativity, and innovation</li>
+                    </ul>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="5" stroke="#4caf50" stroke-width="2" fill="white"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#4caf50" stroke-width="2"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="page_radio_container hidden page_radio_1">
+                    <h2 class="subtitle">Our Teams</h2>
+                    <h3>Design Team</h3>
+                    <p>Creates robot design and aesthetics.</p>
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                        </g>
+                    </svg>
+                    <h3>Programming Team</h3>
+                    <p>Codes and develops software for the robot.</p>
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                        </g>
+                    </svg>
+                    <h3>Build Team</h3>
+                    <p>Assembles and constructs the robot.</p>
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                        </g>
+                    </svg>
+                    <h3>Marketing Team</h3>
+                    <p>Promotes the club and manages outreach.</p>
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#ff9800" stroke-width="2"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="page_radio_container hidden page_radio_2">
+                    <h2 class="subtitle">Competition Schedule</h2>
+                    <table id="competition_table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <script type="text/javascript">
+                        async function getData() {
+                            const table = document.querySelector('table[id="competition_table"] > tbody');
+                            try {
+                                const response = await fetch("/file?file=events.json");
+                                const jsonData = await response.json();
+                                for (var i = 0; i < jsonData.length; i++) {
+                                    const row = table.appendChild(document.createElement("tr"));
+                                    row.appendChild(document.createElement("td")).textContent = jsonData[i].date;
+                                    row.appendChild(document.createElement("td")).textContent = jsonData[i].time;
+                                    row.appendChild(document.createElement("td")).textContent = jsonData[i].location;
+                                }
+                            } catch (e) {}
+                        }
+                        getData();
+                    </script>
+                </div>
             </div>
         </section>
         <script type="text/javascript">

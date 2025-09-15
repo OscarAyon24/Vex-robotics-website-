@@ -1,5 +1,6 @@
 from typing import Literal
 from enum import Enum
+import threading
 import socket
 
 class Cookie:
@@ -85,7 +86,7 @@ class Server:
             self.posts[path] = func
         return _post
     @staticmethod
-    def parseData(data: str):
+    def parse_data(data: str):
         data = data.split("&")
         output = {}
         for item in data:
@@ -104,7 +105,7 @@ class Server:
             else: content = ""
             while len(content) < length:
                 content += socket.recv(1024).decode("utf-8")
-            data = Server.parseData(content)
+            data = Server.parse_data(content)
         if headers.__contains__("Cookie: "):
             cookies = Cookie.buildDict(headers.split("Cookie: ")[1].split("\r\n")[0].split("; "))
 
@@ -114,27 +115,42 @@ class Server:
 
         # Start listening for incoming connections
         self.server_socket.listen(1)
-        print(f"Server listening")
+        print("Server listening")
 
-        while self.running:
-            # Accept a connection from a client
-            client_socket, client_addr = self.server_socket.accept()
+        listen_thread = threading.Thread(target=self.__server_loop)
+        self.shutdown_flag = threading.Event()
+        listen_thread.start()
 
-            # Receive the request data
-            client_request, data, cookies, get = self.recieve_data(client_socket)
+        while not self.shutdown_flag.is_set():
+            cmd = input()
+            if cmd == "stop":
+                self.shutdown_flag.set()
+                self.server_socket.close()
 
-            request = client_request.split("\r\n")[0].split(" ")[1].split("?")
+    def __server_loop(self):
+        while not self.shutdown_flag.is_set():
+            try :
+                # Accept a connection from a client
+                client_socket, client_addr = self.server_socket.accept()
 
-            if len(request) == 2: data = self.parseData(request[1])
+                # Receive the request data
+                client_request, data, cookies, get = self.recieve_data(client_socket)
 
-            print(f"Request for {request[0]} from {client_addr} with cookies {cookies} and data {data}\n")
+                request = client_request.split("\r\n")[0].split(" ")[1].split("?")
 
-            if get and request[0] in self.gets:
-                client_socket.sendall(self.gets[request[0]](cookies, data).build())
-            elif not get and request[0] in self.posts:
-                client_socket.sendall(self.posts[request[0]](cookies, data).build())
-            else:
-                html_data = open("./site_data/404.html", "r").read()
-                client_socket.sendall(f"HTTP/1.1 404 Not Found\nContent-type: text/html\n\n{html_data}".encode('utf-8'))
+                if len(request) == 2: data = self.parse_data(request[1])
+
+                print(f"Request for {request[0]} from {client_addr} with cookies {cookies} and data {data}\n")
+
+                if get and request[0] in self.gets:
+                    client_socket.sendall(self.gets[request[0]](cookies, data).build())
+                elif not get and request[0] in self.posts:
+                    client_socket.sendall(self.posts[request[0]](cookies, data).build())
+                else:
+                    html_data = open("./site_data/404.html", "r").read()
+                    client_socket.sendall(f"HTTP/1.1 404 Not Found\nContent-type: text/html\n\n{html_data}".encode('utf-8'))
                 
-            client_socket.close()
+                client_socket.close()
+            except OSError:
+                continue
+        print("Server shuting down")
