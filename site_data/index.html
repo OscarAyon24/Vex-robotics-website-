@@ -18,7 +18,17 @@
                     left: -256px;
                 }
             }
-            @keyframes rotate {
+            @keyframes slide {
+                from
+                {
+                    left: 200px;
+                }
+                to
+                {
+                    left: 45px;
+                }
+            }
+            @keyframes spin180 {
                 from
                 {
                     transform: rotateZ(0deg);
@@ -26,6 +36,16 @@
                 to
                 {
                     transform: rotateZ(180deg);
+                }
+            }
+            @keyframes spin360 {
+                from
+                {
+                    transform: rotateZ(180deg);
+                }
+                to
+                {
+                    transform: rotateZ(360deg);
                 }
             }
             body {
@@ -43,6 +63,7 @@
                 inset: 0px;
                 overflow: hidden;
                 line-height: 1.6;
+                margin: 0;
             }
             h1.title {
                 font-size: 2.75rem;
@@ -60,14 +81,27 @@
             p {
                 font-weight: 400;
             }
-            .sidebar {
+            section.sidebar {
                 position: relative;
+                height: 100%;
+                width: 256px;
+            }
+            div.collapse_button {
+                position: absolute;
+                z-index: 2;
+                left: 200px;
+            }
+            div.sidebar {
+                position: absolute;
                 user-select: auto;
                 width: 256px;
-                height: auto;
+                height: 100%;
                 box-sizing: border-box;
                 flex-shrink: 0;
                 background-color: rgb(38, 39, 48);
+                top: 0;
+                left: 0;
+                z-index: 1;
             }
             .page_container {
                 display: flex;
@@ -77,6 +111,7 @@
                 -webkit-box-align: center;
                 align-items: center;
                 height: 100dvh;
+                margin: 8px;
             }
             .content {
                 padding: 6rem 1rem 10rem;
@@ -96,6 +131,8 @@
             }
             span.material_icon {
                 font-family: 'Material Symbols Rounded', sans-serif;
+                display: inline-block; /* Essential for transform to work on a span */
+                transform-origin: center center; /* Sets the rotation origin to the center of the span (default) */
             }
             table {
                 border: 1px solid rgba(250, 250, 250, 0.1);
@@ -119,6 +156,13 @@
     <body>
         <noscript>This website requires the use of JavaScript code. Please enable it and refresh</noscript>
         <section class="sidebar">
+            <div class="collapse_button">
+                <button class="material_icon_button" aria-label="">
+                    <span translate="no" class="material_icon">
+                        keyboard_double_arrow_left
+                    </span>
+                </button>
+            </div>
             <div class="sidebar">
                 <svg role="img" width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g>
@@ -147,13 +191,6 @@
                         <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                     </g>
                 </svg>
-            </div>
-            <div class="collapse_button">
-                <button class="material_icon_button" aria-label="">
-                    <span translate="no" class="material_icon">
-                        keyboard_double_arrow_left
-                    </span>
-                </button>
             </div>
         </section>
         <section class="page_container">
@@ -275,11 +312,30 @@
                 });
             });
 
-            const collaps = document.querySelector("button.material_icon_button"), sidebar = document.querySelector("section.sidebar");
+            var collaped = false;
+
+            const collaps_div = document.querySelector("div.collapse_button"), collaps = document.querySelector("button.material_icon_button"), collaps_text = document.querySelector("span.material_icon"), sidebar = document.querySelector("div.sidebar");
             collaps.addEventListener('click', () => {
-                sidebar.style = "animation: collapse 0.5s; left: -256px;";
-                collaps.style = "animation: rotate 0.5s; transform: rotateZ(180deg);";
-                //collaps.style = "right: 0px;";
+                if (collaped) {
+                    sidebar.style = "animation: collapse reverse 0.5s;";
+                    collaps_div.style = "animation: slide reverse 0.5s;";
+                    collaps_text.style = "animation: spin360 0.5s;";
+                    setTimeout(() => {
+                        collaps_text.removeAttribute("style");
+                        collaps_div.removeAttribute("style");
+                        sidebar.removeAttribute("style");
+                    }, 500);
+                } else {
+                    sidebar.style = "animation: collapse 0.5s; left: -256px;";
+                    collaps_div.style = "animation: slide 0.5s; left: 45px;";
+                    collaps_text.style = "animation: spin180 0.5s; transform: rotateZ(180deg);";
+                    setTimeout(() => {
+                        sidebar.style = "left: -256px;";
+                        collaps_div.style = "left: 45px;";
+                        collaps_text.style = "transform: rotateZ(180deg);";
+                    }, 500);
+                }
+                collaped = !collaped;
             });
         </script>
     </body>
