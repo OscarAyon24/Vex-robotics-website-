@@ -1,7 +1,7 @@
 import os
 from framework import Server, ResponseData
 
-server = Server(port=8081)
+server = Server(port=8080)
 
 @server.get("/")
 def main(_, __):
@@ -10,24 +10,8 @@ def main(_, __):
 @server.get("/file")
 def fileEndpoint(_, data: dict[str, str]):
     if not data.__contains__('file'): return ResponseData(ResponseData.ResponseCode.BAD_REQUEST)
-    elif not data['file'].endswith(".json"): return ResponseData(ResponseData.ResponseCode.UNAUTHORIZED)
+    elif not data['file'].endswith(".json") and not data['file'].endswith(".png"): return ResponseData(ResponseData.ResponseCode.UNAUTHORIZED)
     elif not os.path.exists("./site_data/" + data["file"]): return ResponseData(ResponseData.ResponseCode.NOT_FOUND)
-    else: return ResponseData(ResponseData.ResponseCode.OK).appendHeader(ResponseData.Header("Content-Type", {"json": "application/json"}[data["file"].split(".")[-1]])).appendData(open("./site_data/" + data["file"], "r", encoding="utf-8").read())
-
-@server.get("/girls")
-def teamG(_, __):
-    pass
-
-@server.get("/unity")
-def teamU(_, __):
-    pass
-
-@server.get("/nexus")
-def teamN(_, __):
-    pass
-
-@server.get("/recon")
-def teamR(_, __):
-    pass
+    else: return ResponseData(ResponseData.ResponseCode.OK).appendHeader(ResponseData.Header("Content-Type", {"json": "application/json", "png": "image/png"}[data["file"].split(".")[-1]])).appendData(open("./site_data/" + data["file"], "rb").read())
 
 server.listen()

@@ -53,11 +53,11 @@ class ResponseData:
     def appendHeader(self, header: Header):
         self.headers.append(header)
         return self
-    def appendData(self, data: bytes):
-        self.data += data
-        return self
-    def appendData(self, data: str):
-        self.data += data.encode(encoding="utf-8")
+    def appendData(self, data):
+        if isinstance(data, bytes):
+            self.data += data
+        else:
+            self.data += data.encode(encoding="utf-8")
         return self
     def build(self) -> bytes:
         returnData: bytes = ("HTTP/1.1 " + self._code.value + "\r\n").encode()
