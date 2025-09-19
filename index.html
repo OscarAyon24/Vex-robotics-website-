@@ -278,7 +278,7 @@
                 </div>
                 <div class="page_radio_container hidden page_radio_1">
                     <h2 class="subtitle">Our Teams</h2>
-                    <img src="/file?file=nexus.png" alt="3674N's Logo" />
+                    <img src="./nexus.png" alt="3674N's Logo" />
                     <p>N/A</p>
                     <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
@@ -286,7 +286,7 @@
                             <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                         </g>
                     </svg>
-                    <img src="/file?file=recon.png" alt="3674R's Logo" />
+                    <img src="./recon.png" alt="3674R's Logo" />
                     <p>Team 3674R is an 11 person VEX Robotics team captained by Ramon Khattar Hatem. Their long goal is to qualify for the VEX Robotics World Championship in St. Louis Missouri. The team is dedicated to the design, development, and performance of the competition robot and will do their best to reach their long term goals through hard work, perseverance, and adaptability. As a team, we want to earn awards, have fun at competitions, and build our skills and leave our younger engineers with enough skills to perform even better every following year.</p>
                     <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
@@ -294,7 +294,7 @@
                             <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                         </g>
                     </svg>
-                    <img src="/file?file=girls.png" alt="3674G's Logo" />
+                    <img src="./girls.png" alt="3674G's Logo" />
                     <p>Our mission is to empower young women in robotics by innovation, collaboration, and leadership in a male-dominated field. The girls team believes in promoting equality, embracing diversity, and breaking the barriers in STEM. Through teamwork, creativity, and determination, we strive to inspire future generations of girls to pursue their passions in technology and engineering with confidence.</p>
                     <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
@@ -302,7 +302,7 @@
                             <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
                         </g>
                     </svg>
-                    <img src="/file?file=unity.png" alt="3674U's Logo" width="270" height="151.75" />
+                    <img src="./unity.png" alt="3674U's Logo" width="270" height="151.75" />
                     <p>Unity is built on hands-on experience and teamwork. Through problem solving, adaptability, and communication, our members grow together. We unite students from diverse backgrounds to learn, lead, and prepare the next generation of robotics innovators. Every challenge is a chance to grow.  WIth every member playing a vital role.</p>
                     <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g>
@@ -327,7 +327,7 @@
                         async function getData() {
                             const table = document.querySelector('table[id="competition_table"] > tbody');
                             try {
-                                const response = await fetch("/file?file=events.json");
+                                const response = await fetch("./events.json");
                                 const jsonData = await response.json();
                                 for (var i = 0; i < jsonData.length; i++) {
                                     const row = table.appendChild(document.createElement("tr"));
