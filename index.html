@@ -281,6 +281,12 @@
                 <div class="page_radio_container hidden page_radio_1">
                     <h2 class="subtitle">Our Teams</h2>
                     <!--Needs to be cropped but other than that its good-->
+                    <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <circle cx="12" cy="12" r="5" stroke="#ff9800" stroke-width="2" fill="white"/>
+                            <path d="M12 7V4.5 M12 17V19.5 M7 12H4.5 M17 12H19.5 M8.818 15.17L6.694 17.305M8.818 8.818L6.689 6.689M15.17 8.818L17.305 6.694M15.17 15.17L17.3 17.3" stroke="#ff9800" stroke-width="2"/>
+                        </g>
+                    </svg>
                     <img src="./nexus.png" style="width:500px;height:auto;" alt="3674N's Logo" />
                     <p>My mission is to prepare the next generation of the VEX Robotics club. The team, composed mainly of freshmen, is committed to learning knowledge, and developing the skills needed to succeed in robotics and more. By fostering teamwork, creativity, and perseverance, we aim to equip every member with the tools to grow as problem-solvers and leaders, ensuring the strength and continuation of our club for years to come.</p>
                     <svg role="img" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -319,6 +325,7 @@
                     <table id="competition_table">
                         <thead>
                             <tr>
+                                <th>&nbsp;</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Location</th>
@@ -333,10 +340,14 @@
                                 const response = await fetch("./events.json");
                                 const jsonData = await response.json();
                                 for (var i = 0; i < jsonData.length; i++) {
+                                    const data = jsonData[i];
                                     const row = table.appendChild(document.createElement("tr"));
-                                    row.appendChild(document.createElement("td")).textContent = jsonData[i].date;
-                                    row.appendChild(document.createElement("td")).textContent = jsonData[i].time;
-                                    row.appendChild(document.createElement("td")).textContent = jsonData[i].location;
+                                    row.appendChild(document.createElement("td")).textContent = data.name;
+                                    row.appendChild(document.createElement("td")).textContent = data.date;
+                                    row.appendChild(document.createElement("td")).textContent = data.time;
+                                    const a = row.appendChild(document.createElement("td")).appendChild(document.createElement("a"));
+                                    a.href = "https://maps.app.goo.gl/" + data.location.code;
+                                    a.textContent = data.location.text;
                                 }
                             } catch (e) {
                                 table.remove();
